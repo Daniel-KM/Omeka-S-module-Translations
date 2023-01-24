@@ -1,8 +1,12 @@
 Translations (module for Omeka S)
 =================================
 
-[Translations] is a module for [Omeka S] that allows to add specific
-translations of strings, in particular the hard-coded texts in the theme.
+[Translations] is a module for [Omeka S] that allows users to add their own
+translations of strings.
+
+As of Omeka S 4.0, both modules and themes are capable of providing translations
+on their own. However, this module may still be used to fill in missing
+translations or make overrides.
 
 In Omeka, the translations are managed with `.po` files in the directory `application/language/`
 for the core and in  the directory `language/` of each enabled module. This
