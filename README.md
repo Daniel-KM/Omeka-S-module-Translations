@@ -128,7 +128,7 @@ of the CeCILL license and that you accept its terms.
 Copyright
 ---------
 
-* Copyright Daniel Berthereau, 2018-2019 (see [Daniel-KM] on GitHub)
+* Copyright Daniel Berthereau, 2018-2023 (see [Daniel-KM] on GitHub)
 
 
 [Translations]: https://github.com/Daniel-KM/Omeka-S-module-Translations
