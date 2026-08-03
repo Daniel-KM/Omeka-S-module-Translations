@@ -6,7 +6,7 @@ translations of strings.
 
 As of Omeka S 4.0, both modules and themes are capable of providing translations
 on their own. However, this module may still be used to fill in missing
-translations or make overrides.
+translations or to make overrides.
 
 In Omeka, the translations are managed with `.po` files in the directory `application/language/`
 for the core and in  the directory `language/` of each enabled module. This
@@ -55,16 +55,28 @@ gulp i18n:module:compile --module-name=my-theme
 
 Warning: this process overrides existing templates, so save them first.
 
+To avoid it, put your own strings in a file `language/template.static.pot`
+instead of `language/template.pot`. The task merges it into the generated
+template at each run, and never modifies it, so the strings are kept.
+
+This is the recommended way to use this module: it has no code of its own, so
+the generated `template.pot` contains only the strings found in the modules and
+the themes that were processed. Anything added directly to it is lost on the
+next generation.
+
 ### Activation
 
-In some cases, a cache may be used. In that case, restart the web server or
-simply remove all files starting with `omeka_i18n_cache` in the temp directory
-of the web server, usually `/tmp`, or `/tmp/systemd-private-xxx/tmp`. Or wait
-some hours for the automatic refresh of the translations.
+An updated `.mo` file is taken into account on the next request: Omeka S sets no
+cache for the translations, unlike Omeka Classic, so there is nothing to clear
+and no delay to wait for. There is no need to reinstall the module either.
 
-Anyway, when the translations are updated, you should uninstall and reinstall
-the plugin in the config panel of Omeka. The translations will be automatically
-available.
+If a new translation does not appear, check that the module is enabled and that
+it does not require an upgrade: the config of a module that waits for an upgrade
+is not loaded, so its directory `language/` is not registered.
+
+Note: only the files `.mo` are read, and not the files `.po`, so the
+translations should be compiled. Some editors do it on save, else the command
+`gulp i18n:module:compile --module-name=Translations` can be used.
 
 ### Use of translations
 
@@ -128,19 +140,19 @@ of the CeCILL license and that you accept its terms.
 Copyright
 ---------
 
-* Copyright Daniel Berthereau, 2018-2023 (see [Daniel-KM] on GitHub)
+* Copyright Daniel Berthereau, 2018-2026 (see [Daniel-KM] on GitHub)
 
 
-[Translations]: https://github.com/Daniel-KM/Omeka-S-module-Translations
+[Translations]: https://gitlab.com/Daniel-KM/Omeka-S-module-Translations
 [Omeka S]: https://omeka.org/s
-[plugin Translations]: https://github.com/Daniel-KM/Omeka-plugin-Translations
+[plugin Translations]: https://gitlab.com/Daniel-KM/Omeka-plugin-Translations
 [Omeka Classic]: https://omeka.org/classic
 [installing a module]: https://omeka.org/s/docs/user-manual/modules/#installing-modules
 [poedit]: https://poedit.net
 [lokalize]: https://www.kde.org/applications/development/lokalize
-[module issues]: https://github.com/Daniel-KM/Omeka-plugin-Translations/issues
+[module issues]: https://gitlab.com/Daniel-KM/Omeka-plugin-Translations/-/issues
 [CeCILL v2.1]: https://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html
 [GNU/GPL]: https://www.gnu.org/licenses/gpl-3.0.html
 [FSF]: https://www.fsf.org
 [OSI]: http://opensource.org
-[Daniel-KM]: https://github.com/Daniel-KM "Daniel Berthereau"
+[Daniel-KM]: https://gitlab.com/Daniel-KM "Daniel Berthereau"
